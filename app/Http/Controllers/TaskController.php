@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index(Request $request)
     {
         $query = Task::query();  // shows that now querry can take place on table:Task
@@ -62,6 +65,7 @@ class TaskController extends Controller
 
     public function delete(Request $request, $id)
     {
+
         $task = Task::where('id', $id)->where('user_id', $request->user()->id)->first();
 
         if (! $task) {
@@ -71,6 +75,8 @@ class TaskController extends Controller
 
             ], 404);
         }
+
+        $this->authorize('delete', $task); // ///POLICEy called here
 
         $task->delete();
 

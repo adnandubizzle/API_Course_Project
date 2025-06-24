@@ -15,7 +15,7 @@ class IsMwRunnig
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (1) {
+        if (1) {               // /
             return response()->json(['message' => 'This request was passed by Middleware you created!']);
         }
 
