@@ -12,7 +12,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        return $user->id !== $task->user_id;
+        return $user->id === $task->user_id;
     }
     // /**
     //  * Determine whether the user can view any models.
